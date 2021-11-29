@@ -53,3 +53,11 @@ class Token(BaseModel):
 class TokenData(BaseModel):
     username: Optional[str] = None
     email: Optional[str] = None
+
+class MemberBase(BaseModel):
+    poin: int
+    benefit: str
+    pelanggan_id: int
+
+class MemberCreate(MemberBase):
+    member_id: int

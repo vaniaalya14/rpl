@@ -38,10 +38,10 @@ class Product(Base):
 class Member(Base):
     __tablename__ = "member"
 
-    member_id = Column(Integer, primary_key=True, index=True)
+    member_id = Column(BigInteger, primary_key=True, index=True)
     poin = Column(Integer)
     benefit = Column(String(255))
-    pelanggan_id = Column(BigInteger)
+    # pelanggan_id = Column(BigInteger)
 
     def to_dict(self):
         model_dict = dict(self.__dict__)

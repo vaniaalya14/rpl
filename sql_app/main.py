@@ -46,3 +46,13 @@ def read_products(product_id:int, db: Session = Depends(get_db)):
 def read_all_products(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     products = crud.get_all_products(db, skip=skip, limit=limit)
     return products
+
+@app.get("/product/{nama_product}", response_model=schemas.Product, tags=["product"])
+def read_products_name(nama_product:str, db: Session = Depends(get_db)):
+    products = crud.get_products_name(db, nama_product)
+    return products
+
+@app.patch("/users/", response_model = schemas.UserUpdate, tags=["user"])
+def upgrade_user(email:str, update : schemas.UserUpdate, db: Session = Depends(get_db)):
+    user = crud.upgrade_user(email, db,update)# tambahin exception kalau salah
+    return user
