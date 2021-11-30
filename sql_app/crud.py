@@ -94,7 +94,7 @@ def upgrade_user(db: Session, email: str, user: schemas.UserUpdate):
 
 def create_member(db: Session, member: schemas.MemberCreate):
     # hashed_password = get_password_hash(user.password)
-    current_user = get_user(db, email=email)
+    current_user = get_user(db, email=member)
     db_user = models.Member(member_id=current_user.id, poin= 0, benefit= "belum ada", pelanggan_id=current_user.id)
     db.add(db_user)
     db.commit()

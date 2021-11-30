@@ -32,10 +32,10 @@ def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db), c
     users = crud.get_users(db, skip=skip, limit=limit)
     return users
 
-@app.patch("/users/{email}", tags=["user"])
-def upgrade_user(data: schemas.UserUpdate, skip: int = 0, limit: int = 100, db: Session = Depends(get_db), current_user: schemas.User = Depends(crud.get_current_active_user)):
-    users = crud.upgrade_user(db, current_user.email)
-    return users
+# @app.patch("/users/{email}", tags=["user"])
+# def upgrade_user(data: schemas.UserUpdate, skip: int = 0, limit: int = 100, db: Session = Depends(get_db), current_user: schemas.User = Depends(crud.get_current_active_user)):
+#     users = crud.upgrade_user(db, current_user.email)
+#     return users
 
 @app.get("/product/{product_id}", response_model=schemas.Product, tags=["product"])
 def read_products(product_id:int, db: Session = Depends(get_db)):
@@ -56,3 +56,7 @@ def read_products_name(nama_product:str, db: Session = Depends(get_db)):
 def upgrade_user(email:str, update : schemas.UserUpdate, db: Session = Depends(get_db)):
     user = crud.upgrade_user(email, db,update)# tambahin exception kalau salah
     return user
+
+@app.post("/members/", response_model=schemas.MemberCreate, tags=["member"])
+def create_member(member: schemas.MemberCreate, db: Session = Depends(get_db)):
+    return crud.create_member(db=db, member=member)
