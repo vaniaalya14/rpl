@@ -36,14 +36,6 @@ def update_user(db: Session, email: str, data: schemas.UserUpdate):
 def get_users(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.User).offset(skip).limit(limit).all()
 
-# def upgrade_user(db: Session, email: str):
-#     hasil = db.query(models.Product).filter(models.User.email == email).first()
-#     current_user = get_user(db, email=email)
-#     db.query(models.User).filter(models.User.email == email).update(synchronize_session="fetch", status = "member")
-#     db.commit()
-#     db.refresh(current_user)
-#     return current_user
-
 def get_products(db: Session, product_id: int):
     hasil = db.query(models.Product).filter(models.Product.product_id == product_id).first()
     return hasil
