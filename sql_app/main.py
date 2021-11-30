@@ -47,16 +47,16 @@ def read_all_products(skip: int = 0, limit: int = 100, db: Session = Depends(get
     products = crud.get_all_products(db, skip=skip, limit=limit)
     return products
 
-@app.get("/product/{nama_product}", response_model=schemas.Product, tags=["product"])
-def read_products_name(nama_product:str, db: Session = Depends(get_db)):
-    products = crud.get_products_name(db, nama_product)
-    return products
+# @app.get("/product/{nama_product}", response_model=schemas.Product, tags=["product"])
+# def read_products_name(nama_product:str, db: Session = Depends(get_db)):
+#     products = crud.get_products_name(db, nama_product)
+#     return products
 
-@app.patch("/users/", response_model = schemas.UserUpdate, tags=["user"])
-def upgrade_user(email:str, update : schemas.UserUpdate, db: Session = Depends(get_db)):
-    user = crud.upgrade_user(email, db,update)# tambahin exception kalau salah
+@app.patch("/users/", response_model = schemas.User, tags=["user"])
+def upgrade_user(email:str, db: Session = Depends(get_db)):
+    user = crud.upgrade_user(db, email)# tambahin exception kalau salah
     return user
 
-@app.post("/members/", response_model=schemas.MemberCreate, tags=["member"])
-def create_member(member: schemas.MemberCreate, db: Session = Depends(get_db)):
-    return crud.create_member(db=db, member=member)
+@app.post("/members/", response_model=schemas.MemberBase, tags=["member"])
+def create_member(email:str, db: Session = Depends(get_db)):
+    return crud.create_member(db=db, email=email)

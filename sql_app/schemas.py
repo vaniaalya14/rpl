@@ -55,9 +55,5 @@ class TokenData(BaseModel):
     email: Optional[str] = None
 
 class MemberBase(BaseModel):
-    poin: int
-    benefit: str
-    pelanggan_id: int
-
-class MemberCreate(MemberBase):
     member_id: int
+    poin: int
