@@ -95,3 +95,6 @@ def create_member(db: Session, email: str):
 
 def get_user_by_email(db: Session, email: str):
     return db.query(models.User).filter(models.User.email == email).first()
+
+# def get_user_by_email(db: Session, id: int):
+#     return db.query(models.User).filter(models.User.id == id).first()
